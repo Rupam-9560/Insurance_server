@@ -1,5 +1,4 @@
-const dotenv = require('dotenv');
-dotenv.config({ path: "./server/.env" });
+require("dotenv").config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
@@ -44,6 +43,9 @@ const transporter = nodemailer.createTransport({
 
 app.get('/', (req, res) => res.send('mainpg'));
 
+app.post("/test", (req, res) => {
+  res.json({ message: "backend working" });
+});
 
 app.post("/signup", async (req, res) => {
   try {
@@ -1142,4 +1144,8 @@ app.get("/admin/logout", (req, res) => {
 
 
 
-app.listen(process.env.PORT, () => console.log('server is started'));
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
+  console.log(`server is started on ${PORT}`);
+});
