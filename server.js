@@ -1,9 +1,8 @@
 const dotenv = require('dotenv');
-dotenv.config();
+dotenv.config({ path: "./server/.env" });
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const path = require('path');
 const bcrypt = require('bcrypt');
 const User = require('./models/user');
 const Admin = require('./models/admin')
@@ -26,11 +25,11 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 
 app.use(cors({
-  origin: "http://localhost:5173", // Vite frontend
+  origin: process.env.CLIENT_URL,
   credentials: true
 }));
 
-mongoose.connect(process.env.MONGO_URL)
+mongoose.connect(process.env.MONGO_URL) 
   .then(() => console.log('MongoDB is Connected'))
   .catch(err => console.log(err));
 
@@ -38,8 +37,8 @@ mongoose.connect(process.env.MONGO_URL)
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-        user: 'kumarrupam616@gmail.com',
-        pass: 'stha uwue ihsf dtfx' // App password
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS
     }
 });
 
