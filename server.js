@@ -570,7 +570,7 @@ app.post("/admin/login", async (req, res) => {
     res.cookie("adminToken", token, {
       httpOnly: true,
       sameSite: "lax",
-      secure: false // set true if using HTTPS
+      secure: true // set true if using HTTPS
     });
 
     res.status(200).json({
