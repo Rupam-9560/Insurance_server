@@ -190,8 +190,9 @@ app.post("/login", async (req, res) => {
 
     res.cookie("token", token, {
       httpOnly: true,
-      sameSite: "strict",
-      secure: false
+      sameSite: "none",
+      secure: true,
+      maxAge: 24 * 60 * 60 * 1000
     });
 
     res.status(200).json({
@@ -569,7 +570,7 @@ app.post("/admin/login", async (req, res) => {
     // send cookie
     res.cookie("adminToken", token, {
       httpOnly: true,
-      sameSite: "none",
+      sameSite:"none",
       secure: true,
       maxAge: 24 * 60 * 60 * 1000
     });
