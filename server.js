@@ -569,8 +569,9 @@ app.post("/admin/login", async (req, res) => {
     // send cookie
     res.cookie("adminToken", token, {
       httpOnly: true,
-      sameSite: "lax",
-      secure: true // set true if using HTTPS
+      sameSite: "none",
+      secure: true,
+      maxAge: 24 * 60 * 60 * 1000
     });
 
     res.status(200).json({
